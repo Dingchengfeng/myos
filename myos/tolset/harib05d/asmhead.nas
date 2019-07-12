@@ -97,28 +97,28 @@ pipelineflush:
 		SUB		ECX,512/4		; 减去IPL
 		CALL	memcpy
 
-; asmheadでしなければいけないことは全部し終わったので、
-;	あとはbootpackに任せる
+; 必须由asmhead来完成的工作，至此全部完毕
+;	以后就交由bootpack来完成
 
-; bootpackの起動
+; bootpack的启动
 
 		MOV		EBX,BOTPAK
 		MOV		ECX,[EBX+16]
 		ADD		ECX,3			; ECX += 3;
 		SHR		ECX,2			; ECX /= 4;
-		JZ		skip			; 転送するべきものがない
-		MOV		ESI,[EBX+20]	; 転送元
+		JZ		skip			; 没有要转送的东西
+		MOV		ESI,[EBX+20]	; 转送源
 		ADD		ESI,EBX
-		MOV		EDI,[EBX+12]	; 転送先
+		MOV		EDI,[EBX+12]	; 转送目的地
 		CALL	memcpy
 skip:
-		MOV		ESP,[EBX+12]	; スタック初期値
+		MOV		ESP,[EBX+12]	; 栈初始值
 		JMP		DWORD 2*8:0x0000001b
 
 waitkbdout:
 		IN		 AL,0x64
 		AND		 AL,0x02
-		JNZ		waitkbdout		; ANDの結果が0でなければwaitkbdoutへ
+		JNZ		waitkbdout		; AND的结果如果不是0，就跳转到waitkbdout
 		RET
 
 memcpy:
@@ -127,7 +127,7 @@ memcpy:
 		MOV		[EDI],EAX
 		ADD		EDI,4
 		SUB		ECX,1
-		JNZ		memcpy			; 引き算した結果が0でなければmemcpyへ
+		JNZ		memcpy			; SUB 的结果如果不是0，就跳转到memcpy
 		RET
 ; memcpyはアドレスサイズプリフィクスを入れ忘れなければ、ストリング命令でも書ける
 
