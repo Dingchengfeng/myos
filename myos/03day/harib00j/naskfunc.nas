@@ -1,21 +1,21 @@
 ; naskfunc
 ; TAB=4
 
-[FORMAT "WCOFF"]				; ƒIƒuƒWƒFƒNƒgƒtƒ@ƒCƒ‹‚ðì‚éƒ‚[ƒh	
-[BITS 32]						; 32ƒrƒbƒgƒ‚[ƒh—p‚Ì‹@ŠBŒê‚ðì‚ç‚¹‚é
+[FORMAT "WCOFF"]				; åˆ¶ä½œç›®æ ‡æ–‡ä»¶çš„æ¨¡å¼	
+[BITS 32]						; åˆ¶ä½œ32ä½æ¨¡å¼çš„æœºå™¨è¯­è¨€
 
 
-; ƒIƒuƒWƒFƒNƒgƒtƒ@ƒCƒ‹‚Ì‚½‚ß‚Ìî•ñ
+; åˆ¶ä½œç›®æ ‡æ–‡ä»¶çš„ä¿¡æ¯
 
-[FILE "naskfunc.nas"]			; ƒ\[ƒXƒtƒ@ƒCƒ‹–¼î•ñ
+[FILE "naskfunc.nas"]			; æºæ–‡ä»¶åä¿¡æ¯
 
-		GLOBAL	_io_hlt			; ‚±‚ÌƒvƒƒOƒ‰ƒ€‚ÉŠÜ‚Ü‚ê‚éŠÖ”–¼
+		GLOBAL	_io_hlt			; ç¨‹åºä¸­åŒ…å«çš„å‡½æ•°å
 
 
-; ˆÈ‰º‚ÍŽÀÛ‚ÌŠÖ”
+; ä¸€ä¸‹æ˜¯å®žé™…çš„å‡½æ•°
 
-[SECTION .text]		; ƒIƒuƒWƒFƒNƒgƒtƒ@ƒCƒ‹‚Å‚Í‚±‚ê‚ð‘‚¢‚Ä‚©‚çƒvƒƒOƒ‰ƒ€‚ð‘‚­
+[SECTION .text]		; å‡½æ•°éƒ¨åˆ†å¼€å§‹
 
-_io_hlt:	; void io_hlt(void);
+_io_hlt:	; void io_hlt(void)
 		HLT
 		RET

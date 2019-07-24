@@ -1,4 +1,4 @@
-TOOLPATH = ../z_tools/
+TOOLPATH = ../../tolset/z_tools/
 MAKE     = $(TOOLPATH)make.exe -r
 NASK     = $(TOOLPATH)nask.exe
 EDIMG    = $(TOOLPATH)edimg.exe
@@ -20,7 +20,7 @@ haribote.sys : haribote.nas Makefile
 
 #\是续行符号
 haribote.img : ipl.bin haribote.sys Makefile
-	$(EDIMG) imgin:../z_tools/fdimg0at.tek \
+	$(EDIMG) imgin:$(TOOLPATH)fdimg0at.tek \
 		wbinimg src:ipl.bin len:512 from:0 to:0 \
 		copy from:haribote.sys to:@: \
 		imgout:haribote.img
@@ -31,8 +31,8 @@ img :
 
 run :
 	$(MAKE) img
-	$(COPY) haribote.img ..\z_tools\qemu\fdimage0.bin
-	$(MAKE) -C ../z_tools/qemu
+	$(COPY) haribote.img ..\..\tolset\z_tools\qemu\fdimage0.bin
+	$(MAKE) -C $(TOOLPATH)qemu
 
 install :
 	$(MAKE) img

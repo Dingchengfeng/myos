@@ -2,7 +2,7 @@ void HariMain(void)
 {
 
 fin:
-	/* 憐梡HLT,扐惀C?尵晄? */
+	/* 这里想用HLT,但C语言中不能用HLT!*/
 	goto fin;
 
 }

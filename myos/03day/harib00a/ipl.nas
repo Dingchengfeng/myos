@@ -30,22 +30,22 @@
 
 entry:
 		MOV		AX,0			; 初始化寄存器
-		MOV		SS,AX
-		MOV		SP,0x7c00
-		MOV		DS,AX
+		MOV		SS,AX     ; 栈段寄存器
+		MOV		SP,0x7c00 ; 栈指针寄存器
+		MOV		DS,AX     ; 默认数据段寄存器置0
 		
 ;读盘
 		
 		MOV		AX,0x0820
-		MOV		ES,AX			
-		MOV		CH,0			
-		MOV		DH,0			
-		MOV		CL,2			
+		MOV		ES,AX   ; 附加段寄存器			
+		MOV		CH,0		;	柱面
+		MOV		DH,0		; 磁头	
+		MOV		CL,2		; 扇区	
 
-		MOV		AH,0x02			
-		MOV		AL,1			
-		MOV		BX,0
-		MOV		DL,0x00			
+		MOV		AH,0x02	; 读盘		
+		MOV		AL,1		;	处理对象的扇区数;(只能同时处理连续的扇区)
+		MOV		BX,0		; ES:BX＝缓冲区的地址 ES*10H+BX
+		MOV		DL,0x00	; 驱动器（00H~7FH：软盘；80H~0FFH：硬盘）		
 		INT		0x13			
 		JC		error			
 	

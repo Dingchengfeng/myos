@@ -1,4 +1,4 @@
-;hello-os
+;haribote-ipl
 ;TAB=4
 
 CYLS	EQU		10				; 定义常量CYLS=10
@@ -51,7 +51,7 @@ retry:
 		MOV		BX,0			; ES*16+BX 缓冲区地址
 		MOV		DL,0x00			; A驱动器
 		INT		0x13			; BIOS
-		JNC		fin				; 没出错，跳转
+		JNC		next				; 没出错，跳转
 		ADD		SI,1			; 往SI加1
 		CMP		SI,5			; 比较SI与5
 		JAE		error			; SI >= 5 跳到error
@@ -77,6 +77,7 @@ next:
 		
 ;跳转到	0xc200（0x0800+0x4200）	开始执行haribote.sys
 
+		MOV		[0x0ff0],CH     ;读入的柱面数放在这里
 		JMP		0xc200
 		
 error:

@@ -1,15 +1,13 @@
-8086（16位机）
-AX accumulator,累加寄存器（AL+AH）
-BX base,基址寄存器（BL+CH）//可用来指定内存地址
-CX counter,计数寄存器（CL+CH）
+8086（16位机） 8个16位寄存器
+AX accumulator,累加寄存器（AL+AH）//用来进行各种运算
+BX base,基址寄存器（BL+CH）//可用来指定内存地址（作为基点）
+CX counter,计数寄存器（CL+CH）//用于计数
 DX data,数据寄存器（DL+DH）
-
-
 SP stack pointer,栈指针寄存器
 BP base pointer,基址指针寄存器//可用来指定内存地址
-
 SI source index,源变址寄存器//可用来指定内存地址
 DI destination index,目的变址寄存器//可用来指定内存地址
+
 
 段寄存器
 CS code segment,代码段寄存器

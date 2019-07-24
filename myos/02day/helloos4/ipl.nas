@@ -57,5 +57,4 @@ msg:
 		
 		RESB	0x7dfe-$		; 补0到0x7dfe
 
-		DB		0x55, 0xaa		;启动扇区结尾标志
-		
+		DB		0x55, 0xaa		;启动扇区结尾标志	

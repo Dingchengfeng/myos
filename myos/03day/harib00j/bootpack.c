@@ -1,15 +1,10 @@
-/* 懠偺僼傽僀儖偱嶌偭偨娭悢偑偁傝傑偡偲C僐儞僷僀儔偵嫵偊傞 */
-
+/*告诉编译器，有一个函数在别的文件里*/
 void io_hlt(void);
-
-/* 娭悢愰尵側偺偵丄{}偑側偔偰偄偒側傝;傪彂偔偲丄
-	懠偺僼傽僀儖偵偁傞偐傜傛傠偟偔偹丄偲偄偆堄枴偵側傞偺偱偡丅 */
-
 void HariMain(void)
 {
 
 fin:
-	io_hlt(); /* 偙傟偱naskfunc.nas偺_io_hlt偑幚峴偝傟傑偡 */
+	/* 这里想用HLT,但C语言中不能用HLT!*/
 	goto fin;
 
 }

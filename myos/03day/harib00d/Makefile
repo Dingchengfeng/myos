@@ -1,4 +1,4 @@
-TOOLPATH = ../z_tools/
+TOOLPATH = ../../tolset/z_tools/
 MAKE     = $(TOOLPATH)make.exe -r
 NASK     = $(TOOLPATH)nask.exe
 EDIMG    = $(TOOLPATH)edimg.exe
@@ -17,7 +17,7 @@ ipl.bin : ipl.nas Makefile
 	$(NASK) ipl.nas ipl.bin ipl.lst
 
 haribote.img : ipl.bin Makefile
-	$(EDIMG)   imgin:../z_tools/fdimg0at.tek \
+	$(EDIMG)   imgin:$(TOOLPATH)fdimg0at.tek \
 		wbinimg src:ipl.bin len:512 from:0 to:0   imgout:haribote.img
 
 # ƒRƒ}ƒ“ƒh
@@ -30,8 +30,8 @@ img :
 
 run :
 	$(MAKE) img
-	$(COPY) haribote.img ..\z_tools\qemu\fdimage0.bin
-	$(MAKE) -C ../z_tools/qemu
+	$(COPY) haribote.img ..\..\z_tools\qemu\fdimage0.bin
+	$(MAKE) -C $(TOOLPATH)qemu
 
 install :
 	$(MAKE) img

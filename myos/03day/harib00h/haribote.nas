@@ -2,7 +2,7 @@
 ; TAB=4
 
 ;有关BOOT_INFO
-CYLS	EQU		0x0ff0		;设定启动区
+CYLS	EQU		0x0ff0		;启动区读入的柱面数
 LEDS	EQU		0x0ff1		;键盘指示灯状态
 VMODE	EQU		0x0ff2		;关于颜色数目的信息。颜色位数。
 SCRNX	EQU		0x0ff4		;分辨率的X

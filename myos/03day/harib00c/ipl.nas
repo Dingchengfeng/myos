@@ -49,7 +49,7 @@ retry:
 		MOV		BX,0			; ES*16+BX 缓冲区地址
 		MOV		DL,0x00			; A驱动器
 		INT		0x13			; BIOS
-		JNC		fin				; 没出错，跳转
+		JNC		next			; 没出错，跳转
 		ADD		SI,1			; 往SI加1
 		CMP		SI,5			; 比较SI与5
 		JAE		error			; SI >= 5 跳到error
