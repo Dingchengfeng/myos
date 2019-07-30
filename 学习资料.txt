@@ -2,6 +2,8 @@
 https://blog.csdn.net/weixin_34365417/article/details/86312121
 中断向量表
 https://blog.csdn.net/liguodong86/article/details/3973337 
+寄存器
+https://blog.csdn.net/leopard21/article/details/39377163
 
 1.MOV WORD [678],123
 123对应的16位二进制数是	：00000000 01111011

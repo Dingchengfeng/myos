@@ -1,4 +1,5 @@
-8086（16位机） 8个16位寄存器
+8086（16位机） 
+8个16位 通用寄存器
 AX accumulator,累加寄存器（AL+AH）//用来进行各种运算
 BX base,基址寄存器（BL+CH）//可用来指定内存地址（作为基点）
 CX counter,计数寄存器（CL+CH）//用于计数
@@ -9,11 +10,26 @@ SI source index,源变址寄存器//可用来指定内存地址
 DI destination index,目的变址寄存器//可用来指定内存地址
 
 
-段寄存器
+6个16位 段寄存器 
 CS code segment,代码段寄存器
 DS data segment,数据段寄存器 //默认段寄存器
 ES extra segment,附加段寄存器
 FS 没有名称
 GS 没有名称
 SS stack segment,栈段寄存器
+
+标志寄存器:EFLAGS
+
+控制寄存器：CR0-CR4
+作用:控制寄存器决定处理器的操作模式和当前执行任务的一些特征
+种类:
+CR0: 控制系统的工作模式和处理器的状态
+CR1: 保留
+CR2 :保留出错的线性地址
+CR3:页目录基址的物理地址和PCD和PWT标志位(和CACHE有关)
+CR4:一些结构的扩展.表明对于特定的处理器和操作系统执行支持. 
+
+调试寄存器：DR0-DR7
+
+系统地址寄存器:GDTR、IDTR、LDTR和TR
 
