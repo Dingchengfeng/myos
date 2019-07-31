@@ -11,7 +11,7 @@
 		GLOBAL	_io_out8, _io_out16, _io_out32
 		GLOBAL	_io_load_eflags, _io_store_eflags
 
-[SECTION .text]					;第三方打撒
+[SECTION .text]					
 
 _io_hlt:	; void io_hlt(void);
 		HLT

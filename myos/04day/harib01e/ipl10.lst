@@ -1,108 +1,108 @@
      1 00000000                                 ; haribote-ipl
      2 00000000                                 ; TAB=4
      3 00000000                                 
-     4  = 0000000A                              CYLS	EQU		10				; 偳偙傑偱撉傒崬傓偐
+     4  = 0000000A                              CYLS	EQU		10				; 定义常量CYLS=10
      5 00000000                                 
-     6                                          		ORG		0x7c00			; 偙偺僾儘僌儔儉偑偳偙偵撉傒崬傑傟傞偺偐
+     6                                          		ORG		0x7c00			; bios会默认把启动程序装载到这个地址，这是条伪指令，告诉汇编器程序会从内存地址的这个位置执行，后续编译时以这个地址为参照这条指令下，$代表要读入的内存地址（本来表示到现在这一行字节数），也就是加了0x7c00						
      7 00007C00                                 
-     8 00007C00                                 ; 埲壓偼昗弨揑側FAT12僼僅乕儅僢僩僼儘僢僺乕僨傿僗僋偺偨傔偺婰弎
+     8 00007C00                                 ;标准FAT12格式软盘专用代码
      9 00007C00                                 
     10 00007C00 EB 4E                           		JMP		entry
     11 00007C02 90                              		DB		0x90
-    12 00007C03 48 41 52 49 42 4F 54 45         		DB		"HARIBOTE"		; 僽乕僩僙僋僞偺柤慜傪帺桼偵彂偄偰傛偄乮8僶僀僩乯
-    13 00007C0B 0200                            		DW		512				; 1僙僋僞偺戝偒偝乮512偵偟側偗傟偽偄偗側偄乯
-    14 00007C0D 01                              		DB		1				; 僋儔僗僞偺戝偒偝乮1僙僋僞偵偟側偗傟偽偄偗側偄乯
-    15 00007C0E 0001                            		DW		1				; FAT偑偳偙偐傜巒傑傞偐乮晛捠偼1僙僋僞栚偐傜偵偡傞乯
-    16 00007C10 02                              		DB		2				; FAT偺屄悢乮2偵偟側偗傟偽偄偗側偄乯
-    17 00007C11 00E0                            		DW		224				; 儖乕僩僨傿儗僋僩儕椞堟偺戝偒偝乮晛捠偼224僄儞僩儕偵偡傞乯
-    18 00007C13 0B40                            		DW		2880			; 偙偺僪儔僀僽偺戝偒偝乮2880僙僋僞偵偟側偗傟偽偄偗側偄乯
-    19 00007C15 F0                              		DB		0xf0			; 儊僨傿傾偺僞僀僾乮0xf0偵偟側偗傟偽偄偗側偄乯
-    20 00007C16 0009                            		DW		9				; FAT椞堟偺挿偝乮9僙僋僞偵偟側偗傟偽偄偗側偄乯
-    21 00007C18 0012                            		DW		18				; 1僩儔僢僋偵偄偔偮偺僙僋僞偑偁傞偐乮18偵偟側偗傟偽偄偗側偄乯
-    22 00007C1A 0002                            		DW		2				; 僿僢僪偺悢乮2偵偟側偗傟偽偄偗側偄乯
-    23 00007C1C 00000000                        		DD		0				; 僷乕僥傿僔儑儞傪巊偭偰側偄偺偱偙偙偼昁偢0
-    24 00007C20 00000B40                        		DD		2880			; 偙偺僪儔僀僽戝偒偝傪傕偆堦搙彂偔
-    25 00007C24 00 00 29                        		DB		0,0,0x29		; 傛偔傢偐傜側偄偗偳偙偺抣偵偟偰偍偔偲偄偄傜偟偄
-    26 00007C27 FFFFFFFF                        		DD		0xffffffff		; 偨傇傫儃儕儏乕儉僔儕傾儖斣崋
-    27 00007C2B 48 41 52 49 42 4F 54 45 4F 53   		DB		"HARIBOTEOS "	; 僨傿僗僋偺柤慜乮11僶僀僩乯
+    12 00007C03 48 45 4C 4C 4F 49 50 4C         		DB		"HELLOIPL"		;启动扇区的名字，可以是任意字符（必须8字节）
+    13 00007C0B 0200                            		DW		512				;每个扇区大小（必须为512字节）
+    14 00007C0D 01                              		DB		1				;簇的大小（必须为1个扇区）
+    15 00007C0E 0001                            		DW		1				;FAT的起始位置（一般从第1个扇区开始）
+    16 00007C10 02                              		DB		2				;FAT的个数（必须为2）
+    17 00007C11 00E0                            		DW		224				;根目录的大小（一般设置成224项）
+    18 00007C13 0B40                            		DW		2880			;该磁盘的大小（必须是2880扇区）
+    19 00007C15 F0                              		DB		0xf0			;磁盘的种类（必须是0xf0）
+    20 00007C16 0009                            		DW		9				;FAT的长度（必须是9扇区）
+    21 00007C18 0012                            		DW		18				;1个磁道有几个扇区（必须是18）
+    22 00007C1A 0002                            		DW		2				;磁头数（必须是2）
+    23 00007C1C 00000000                        		DD		0				;是否使用分区（0表示否，必须是0）
+    24 00007C20 00000B40                        		DD		2880			;重写一次磁盘大小
+    25 00007C24 00 00 29                        		DB		0,0,0x29		;这三个字节意义不明，必须如此
+    26 00007C27 FFFFFFFF                        		DD		0xffffffff		;可能是卷标号码
+    27 00007C2B 48 45 4C 4C 4F 2D 4F 53 20 20   		DB		"HELLO-OS   "	;磁盘名称（11字节任意字符）
        00007C35 20 
-    28 00007C36 46 41 54 31 32 20 20 20         		DB		"FAT12   "		; 僼僅乕儅僢僩偺柤慜乮8僶僀僩乯
-    29 00007C3E 00 00 00 00 00 00 00 00 00 00   		RESB	18				; 偲傝偁偊偢18僶僀僩偁偗偰偍偔
+    28 00007C36 46 41 54 31 32 20 20 20         		DB		"FAT12   "		;磁盘格式名称（8字节）
+    29 00007C3E 00 00 00 00 00 00 00 00 00 00   		RESB	18				;空出18字节（这18个字节会用0填充）					
        00007C48 00 00 00 00 00 00 00 00 
-    30 00007C50                                 
-    31 00007C50                                 ; 僾儘僌儔儉杮懱
+    30 00007C50                                 	
+    31 00007C50                                 ;程序主体
     32 00007C50                                 
     33 00007C50                                 entry:
-    34 00007C50 B8 0000                         		MOV		AX,0			; 儗僕僗僞弶婜壔
-    35 00007C53 8E D0                           		MOV		SS,AX
-    36 00007C55 BC 7C00                         		MOV		SP,0x7c00
-    37 00007C58 8E D8                           		MOV		DS,AX
+    34 00007C50 B8 0000                         		MOV		AX,0			;初始化寄存器
+    35 00007C53 8E D0                           		MOV		SS,AX			;栈段寄存器
+    36 00007C55 BC 7C00                         		MOV		SP,0x7c00		;栈指针寄存器
+    37 00007C58 8E D8                           		MOV		DS,AX			;数据段寄存器
     38 00007C5A                                 
-    39 00007C5A                                 ; 僨傿僗僋傪撉傓
+    39 00007C5A                                 ;读磁盘
     40 00007C5A                                 
     41 00007C5A B8 0820                         		MOV		AX,0x0820
     42 00007C5D 8E C0                           		MOV		ES,AX
-    43 00007C5F B5 00                           		MOV		CH,0			; 僔儕儞僟0
-    44 00007C61 B6 00                           		MOV		DH,0			; 僿僢僪0
-    45 00007C63 B1 02                           		MOV		CL,2			; 僙僋僞2
+    43 00007C5F B5 00                           		MOV		CH,0			; 柱面0
+    44 00007C61 B6 00                           		MOV		DH,0			; 磁头0
+    45 00007C63 B1 02                           		MOV		CL,2			; 扇区2,第一个扇区也就是本程序所在扇区是被BIOS直接读入并执行的
     46 00007C65                                 readloop:
-    47 00007C65 BE 0000                         		MOV		SI,0			; 幐攕夞悢傪悢偊傞儗僕僗僞
+    47 00007C65 BE 0000                         		MOV		SI,0			; 记录失败次数的寄存器
     48 00007C68                                 retry:
-    49 00007C68 B4 02                           		MOV		AH,0x02			; AH=0x02 : 僨傿僗僋撉傒崬傒
-    50 00007C6A B0 01                           		MOV		AL,1			; 1僙僋僞
-    51 00007C6C BB 0000                         		MOV		BX,0
-    52 00007C6F B2 00                           		MOV		DL,0x00			; A僪儔僀僽
-    53 00007C71 CD 13                           		INT		0x13			; 僨傿僗僋BIOS屇傃弌偟
-    54 00007C73 73 10                           		JNC		next			; 僄儔乕偑偍偒側偗傟偽next傊
-    55 00007C75 83 C6 01                        		ADD		SI,1			; SI偵1傪懌偡
-    56 00007C78 83 FE 05                        		CMP		SI,5			; SI偲5傪斾妑
-    57 00007C7B 73 32                           		JAE		error			; SI >= 5 偩偭偨傜error傊
-    58 00007C7D B4 00                           		MOV		AH,0x00
-    59 00007C7F B2 00                           		MOV		DL,0x00			; A僪儔僀僽
-    60 00007C81 CD 13                           		INT		0x13			; 僪儔僀僽偺儕僙僢僩
+    49 00007C68 B4 02                           		MOV		AH,0x02			; AH=0x02 : 读入磁盘
+    50 00007C6A B0 01                           		MOV		AL,1			; 1个扇区
+    51 00007C6C BB 0000                         		MOV		BX,0			; ES*16+BX 缓冲区地址
+    52 00007C6F B2 00                           		MOV		DL,0x00			; A驱动器
+    53 00007C71 CD 13                           		INT		0x13			; BIOS
+    54 00007C73 73 10                           		JNC		next			; 没出错，跳转
+    55 00007C75 83 C6 01                        		ADD		SI,1			; 往SI加1
+    56 00007C78 83 FE 05                        		CMP		SI,5			; 比较SI与5
+    57 00007C7B 73 32                           		JAE		error			; SI >= 5 跳到error
+    58 00007C7D B4 00                           		MOV		AH,0x00			; AH=0x00 : 0x13重置驱动器	
+    59 00007C7F B2 00                           		MOV		DL,0x00			; A驱动器
+    60 00007C81 CD 13                           		INT		0x13			; 重置驱动器
     61 00007C83 EB E3                           		JMP		retry
     62 00007C85                                 next:
-    63 00007C85 8C C0                           		MOV		AX,ES			; 傾僪儗僗傪0x200恑傔傞
+    63 00007C85 8C C0                           		MOV		AX,ES
     64 00007C87 05 0020                         		ADD		AX,0x0020
-    65 00007C8A 8E C0                           		MOV		ES,AX			; ADD ES,0x020 偲偄偆柦椷偑側偄偺偱偙偆偟偰偄傞
-    66 00007C8C 80 C1 01                        		ADD		CL,1			; CL偵1傪懌偡
-    67 00007C8F 80 F9 12                        		CMP		CL,18			; CL偲18傪斾妑
-    68 00007C92 76 D1                           		JBE		readloop		; CL <= 18 偩偭偨傜readloop傊
-    69 00007C94 B1 01                           		MOV		CL,1
-    70 00007C96 80 C6 01                        		ADD		DH,1
+    65 00007C8A 8E C0                           		MOV		ES,AX			;通过AX将ES加上0x0020,就是把数据缓存地址往后移512字节
+    66 00007C8C 80 C1 01                        		ADD		CL,1			;往CL里加1
+    67 00007C8F 80 F9 12                        		CMP		CL,18			;比较CL与18
+    68 00007C92 76 D1                           		JBE		readloop		;读18个柱面
+    69 00007C94 B1 01                           		MOV		CL,1			
+    70 00007C96 80 C6 01                        		ADD 	DH,1
     71 00007C99 80 FE 02                        		CMP		DH,2
-    72 00007C9C 72 C7                           		JB		readloop		; DH < 2 偩偭偨傜readloop傊
+    72 00007C9C 72 C7                           		JB		readloop		;读反面
     73 00007C9E B6 00                           		MOV		DH,0
     74 00007CA0 80 C5 01                        		ADD		CH,1
     75 00007CA3 80 FD 0A                        		CMP		CH,CYLS
-    76 00007CA6 72 BD                           		JB		readloop		; CH < CYLS 偩偭偨傜readloop傊
-    77 00007CA8                                 
-    78 00007CA8                                 ; 撉傒廔傢偭偨偺偱haribote.sys傪幚峴偩両
-    79 00007CA8                                 
-    80 00007CA8 88 2E 0FF0                      		MOV		[0x0ff0],CH		; IPL偑偳偙傑偱撉傫偩偺偐傪儊儌
+    76 00007CA6 72 BD                           		JB		readloop		;读10个柱面
+    77 00007CA8                                 		
+    78 00007CA8                                 
+    79 00007CA8 88 2E 0FF0                      		MOV		[0x0ff0],CH    ;读入的柱面数放在这里
+    80 00007CAC                                 ;跳转到	0xc200（0x0800+0x4200）	开始执行haribote.sys
     81 00007CAC E9 4551                         		JMP		0xc200
-    82 00007CAF                                 
+    82 00007CAF                                 		
     83 00007CAF                                 error:
-    84 00007CAF BE 7CC7                         		MOV		SI,msg
+    84 00007CAF BE 7CC7                         		MOV		SI,msg		
     85 00007CB2                                 putloop:
-    86 00007CB2 8A 04                           		MOV		AL,[SI]
-    87 00007CB4 83 C6 01                        		ADD		SI,1			; SI偵1傪懌偡
+    86 00007CB2 8A 04                           		MOV		AL,[SI]			;要显示的文字
+    87 00007CB4 83 C6 01                        		ADD		SI,1			; SI里的值自增
     88 00007CB7 3C 00                           		CMP		AL,0
     89 00007CB9 74 09                           		JE		fin
-    90 00007CBB B4 0E                           		MOV		AH,0x0e			; 堦暥帤昞帵僼傽儞僋僔儑儞
-    91 00007CBD BB 000F                         		MOV		BX,15			; 僇儔乕僐乕僪
-    92 00007CC0 CD 10                           		INT		0x10			; 價僨僆BIOS屇傃弌偟
+    90 00007CBB B4 0E                           		MOV		AH,0x0e			; INT 0x10显示文字设置
+    91 00007CBD BB 000F                         		MOV		BX,15			; 指定字符颜色（0-255）
+    92 00007CC0 CD 10                           		INT		0x10			; 调用显卡BIOS
     93 00007CC2 EB EE                           		JMP		putloop
     94 00007CC4                                 fin:
-    95 00007CC4 F4                              		HLT						; 壗偐偁傞傑偱CPU傪掆巭偝偣傞
-    96 00007CC5 EB FD                           		JMP		fin				; 柍尷儖乕僾
+    95 00007CC4 F4                              		HLT						; 让CPU停止，等待指令
+    96 00007CC5 EB FD                           		JMP		fin				; 无限循环		
     97 00007CC7                                 msg:
-    98 00007CC7 0A 0A                           		DB		0x0a, 0x0a		; 夵峴傪2偮
+    98 00007CC7 0A 0A                           		DB		0x0a, 0x0a		; 2个换行
     99 00007CC9 6C 6F 61 64 20 65 72 72 6F 72   		DB		"load error"
-   100 00007CD3 0A                              		DB		0x0a			; 夵峴
+   100 00007CD3 0A                              		DB		0x0a			; 换行
    101 00007CD4 00                              		DB		0
-   102 00007CD5                                 
-   103 00007CD5 00 00 00 00 00 00 00 00 00 00   		RESB	0x7dfe-$		; 0x7dfe傑偱傪0x00偱杽傔傞柦椷
+   102 00007CD5                                 		
+   103 00007CD5 00 00 00 00 00 00 00 00 00 00   		RESB	0x7dfe-$		; 补0到0x7dfe
        00007CDF 00 00 00 00 00 00 00 00 00 00 
        00007CE9 00 00 00 00 00 00 00 00 00 00 
        00007CF3 00 00 00 00 00 00 00 00 00 00 
@@ -133,4 +133,5 @@
        00007DED 00 00 00 00 00 00 00 00 00 00 
        00007DF7 00 00 00 00 00 00 00 
    104 00007DFE                                 
-   105 00007DFE 55 AA                           		DB		0x55, 0xaa
+   105 00007DFE 55 AA                           		DB		0x55, 0xaa		;启动扇区结尾标志
+   106 00007E00                                 		

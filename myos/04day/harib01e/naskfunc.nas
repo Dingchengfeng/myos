@@ -1,16 +1,22 @@
 ; naskfunc
 ; TAB=4
 
-[FORMAT "WCOFF"]				; §ì–Ú?•¶Œ“I–ÍŽ®	
-[INSTRSET "i486p"]				; ???Ší’ö˜¥Šî˜°intel486?ŽÊC
-[BITS 32]						; ???Ší’ö˜¥32ˆÊ–ÍŽ®
-[FILE "naskfunc.nas"]			; ’ö˜Œ¹•¶Œ–¼Ì
+[FORMAT "WCOFF"]				; åˆ¶ä½œç›®æ ‡æ–‡ä»¶çš„æ¨¡å¼
+[INSTRSET "i486p"]				; è¡¨ç¤ºè¦ä½¿ç”¨486çš„å‘½ä»¤	
+[BITS 32]						; åˆ¶ä½œ32ä½æ¨¡å¼çš„æœºå™¨è¯­è¨€
 
-		GLOBAL	_io_hlt,_write_mem8	;º–¾‘S‹Ç”Ÿ”–¼Ì
 
-[SECTION .text]					;”Ÿ”“à—e’iB[SECTION .data]•\Ž¦”˜“à—e’i	
- 
-_io_hlt:	; void io_hlt(void);
+; åˆ¶ä½œç›®æ ‡æ–‡ä»¶çš„ä¿¡æ¯
+
+[FILE "naskfunc.nas"]			; æºæ–‡ä»¶åä¿¡æ¯
+
+		GLOBAL	_io_hlt,_write_mem8			; ç¨‹åºä¸­åŒ…å«çš„å‡½æ•°å
+
+
+; ä»¥ä¸‹æ˜¯å®žé™…çš„å‡½æ•°
+
+[SECTION .text]		; å‡½æ•°éƒ¨åˆ†å¼€å§‹
+
+_io_hlt:	; void io_hlt(void)
 		HLT
 		RET
-

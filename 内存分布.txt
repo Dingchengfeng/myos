@@ -43,3 +43,7 @@ bios使用(256K)
 
 
 格式：[)
+
+bios从软盘加载IPL到0x7c00，并开始执行ipl；
+ipl加载剩余柱面到0x0x8200之后的连续空间，并从0xc200(haribote.sys=asmhead.nas+bootpack.bim)开始执行
+asmhead.nas 切换到32位模式，将整个磁盘加载到0x00100000到0x00268000，做bootpack执行的初始化，然后去执行bootpack（GDT0的2号段）

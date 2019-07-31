@@ -206,7 +206,7 @@ void init_mouse_cursor8(char *mouse, char bc)
 	return;
 }
 
-//buf是我们初始化好的鼠标形状，这个函数就是把鼠标图形放到坐标位置
+//buf是我们初始化好的鼠标形状，这个函数就是把鼠标图形放到坐标(px0,py0)位置,pxsize,pysize是鼠标图形的长和宽，bxsize也是鼠标的宽
 void putblock8_8(char *vram, int vxsize, int pxsize,int pysize, int px0, int py0, char *buf, int bxsize)
 {
 	int x, y;

@@ -39,7 +39,7 @@ void HariMain(void)
 	binfo_vram = (int *) 0x0ff8;
 	xsize = *binfo_scrnx;
 	ysize = *binfo_scrny;
-	vram = (char *) *binfo_vram;
+	vram = (char *) *binfo_vram;//vram指向视频缓冲区0x000a0000;该缓冲区的存储类型是byte
 	
 	init_screen(vram, xsize, ysize);
 

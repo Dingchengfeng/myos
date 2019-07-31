@@ -1,3 +1,10 @@
-*.bin
 *.lst
 *.img
+*.bin
+*.sys
+*.hrb
+*.bim
+*.obj
+*.gas
+
+

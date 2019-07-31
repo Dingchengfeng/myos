@@ -1,13 +1,11 @@
-/* ???Ší—Lˆê˜¢”Ÿ”İ?“I•¶Œ—¢C–ƒ?©ŒÈQˆê‰º*/
 
 void io_hlt(void);
-void write_mem8(int addr,int data);
 
 
 void HariMain(void)
 {
 	int i;
-	char *p; //*pŠw“à‘¶’nš¬‘¶? BYTE ?“x?”˜
+	char *p; /*è¡¨ç¤ºæŒ‡é’ˆæ‰€æŒ‡å®šå†…å­˜æ˜¯ byteç±»å‹ ï¼Œèƒ½å­˜å‚¨8bitå†…å®¹ã€‚ä½†æ˜¯æŒ‡é’ˆpæœ¬èº«æ˜¯32ä½çš„*/
 	for(i = 0xa0000;i<=0xaffff;i++){
 		p = i;
 		*p = i & 0x0f;

@@ -13,11 +13,11 @@ void HariMain(void)
 {
 	int i; 	
 	char *p; //p所指内存存储8位元素
-	init_palette();
+	//init_palette(); //设定调色板
 	
 	p = (char *) 0xa0000; //将地址赋值给p
 	for(i = 0;i<=0xffff;i++){
-		p[i] = i & 0x01;
+		p[i] = i & 0x0f;
 	}
 
 	for(;;){
@@ -53,15 +53,15 @@ void init_palette(void)
 void set_palette(int palette_no, int color_num, unsigned char *rgb)
 {
 	int i, eflags;
-	eflags = io_load_eflags();	/* 割り込み許可フラグの値を記録する */
-	io_cli(); 					/* 許可フラグを0にして割り込み禁止にする */
+	eflags = io_load_eflags();	/* 记录中断许可标志 */
+	io_cli(); 					/* 将中断许可标志设为0，禁止中断 */
 	io_out8(0x03c8, palette_no);//调色板编号
 	for (i = 0; i <= color_num; i++) {
-		io_out8(0x03c9, rgb[0] );
-		io_out8(0x03c9, rgb[1] );
-		io_out8(0x03c9, rgb[2] );
+		io_out8(0x03c9, rgb[0] / 4);//一种说法是VGA的RGB每种原色用6bit表示
+		io_out8(0x03c9, rgb[1] / 4);
+		io_out8(0x03c9, rgb[2] / 4);
 		rgb += 3;
 	}
-	io_store_eflags(eflags);	/* 割り込み許可フラグを元に戻す */
+	io_store_eflags(eflags);	/* 复原中断许可标志 */
 	return;
 }

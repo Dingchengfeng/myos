@@ -7,7 +7,7 @@ void HariMain(void)
 	char *p;
 	p = (char *) 0xa0000; //将地址赋值给p
 	for(i = 0;i<=0xffff;i++){
-		i[p] = i & 0x0f;
+		p[i] = i & 0x0f;
 	}
 
 	for(;;){

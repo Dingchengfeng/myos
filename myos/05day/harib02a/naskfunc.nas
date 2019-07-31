@@ -11,7 +11,7 @@
 		GLOBAL	_io_out8, _io_out16, _io_out32
 		GLOBAL	_io_load_eflags, _io_store_eflags
 
-[SECTION .text]					;[SECTION .text]	表示程序段开始 [SECTION .data]	表示数据段开始
+[SECTION .text]					
 
 _io_hlt:	; void io_hlt(void);
 		HLT

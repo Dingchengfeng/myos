@@ -133,7 +133,7 @@ void putfont8(char *vram, int xsize, int x, int y, char c, char *font)
 	int i;
 	char *p, d /* data */;
 	for (i = 0; i < 16; i++) {
-		p = vram + (y + i) * xsize + x;
+		p = vram + (y + i) * xsize + x; //指向每行行首
 		d = font[i];
 		if ((d & 0x80) != 0) { p[0] = c; }
 		if ((d & 0x40) != 0) { p[1] = c; }

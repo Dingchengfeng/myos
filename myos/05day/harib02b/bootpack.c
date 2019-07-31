@@ -26,21 +26,21 @@ void init_screen(char *vram, int x, int y);
 #define COL8_008484		14
 #define COL8_848484		15
 
-struct BOOTINFO{
+struct BOOTINFO{ //12字节 看做一种复合数据类型 或者叫类
 	char cyls,leds,vmode,reserve;//4字节
 	short scrnx,scrny;//4字节
-	char *vram;//4字节，变量本身占4字节，变量所指内存存储1字节大小的内容
+	char *vram;//4字节，变量本身占4字节，变量所指内存存储byte型数据
 };
 
 void HariMain(void)
 {
 	char *vram;
 	int xsize, ysize;
-	struct BOOTINFO *binfo;
+	struct BOOTINFO *binfo; //对象声明
 
 	init_palette();
-	binfo = (struct BOOTINFO *) 0x0ff0;
-	xsize = (*binfo).scrnx;
+	binfo = (struct BOOTINFO *) 0x0ff0; //对象实例化
+	xsize = (*binfo).scrnx; //对象的点取值法
 	ysize = (*binfo).scrny;
 	vram = (*binfo).vram;
 	

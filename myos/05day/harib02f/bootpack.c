@@ -145,8 +145,8 @@ void putfont8(char *vram, int xsize, int x, int y, char c, char *font)
 	}
 	return;
 }
-
-void putfonts8_asc(char *varm,int xsize,int x,int y, char c,unsigned char *s)
+//(x,y)作左上角定点的8*16*s.length像素矩形显示字符串s,c是颜色
+void putfonts8_asc(char *varm,int xsize,int x,int y, char c,unsigned char *s) //C语言会传递字符串的头地址给s
 {
 	extern char hankaku[4096];
 	for(;*s != 0x00;s++){
