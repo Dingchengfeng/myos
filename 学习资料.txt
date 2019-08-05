@@ -4,7 +4,15 @@ https://blog.csdn.net/weixin_34365417/article/details/86312121
 https://blog.csdn.net/liguodong86/article/details/3973337 
 寄存器
 https://blog.csdn.net/leopard21/article/details/39377163
+IDT GDT结构
+https://blog.csdn.net/ice__snow/article/details/50654629
+
+
 
 1.MOV WORD [678],123
 123对应的16位二进制数是	：00000000 01111011
 低位01111011 放在678 高位00000000放在679
+
+栈顶指针指向低地址
+栈低指针指向高地址
+栈是由高地址往低地址方向生长的

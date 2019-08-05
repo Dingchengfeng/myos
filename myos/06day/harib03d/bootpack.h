@@ -18,7 +18,6 @@ void io_store_eflags(int eflags);
 void load_gdtr(int limit, int addr);
 void load_idtr(int limit, int addr);
 
-
 /* graphic.c */
 void init_palette(void);
 void set_palette(int start, int end, unsigned char *rgb);
@@ -29,7 +28,6 @@ void putfonts8_asc(char *vram, int xsize, int x, int y, char c, unsigned char *s
 void init_mouse_cursor8(char *mouse, char bc);
 void putblock8_8(char *vram, int vxsize, int pxsize,
 int pysize, int px0, int py0, char *buf, int bxsize);
-	
 #define COL8_000000		0
 #define COL8_FF0000		1
 #define COL8_00FF00		2
@@ -57,9 +55,11 @@ struct SEGMENT_DESCRIPTOR {
 	char  base_high; //段基址的高8位
 };
 struct GATE_DESCRIPTOR {
-	short offset_low, selector;
-	char dw_count, access_right;
-	short offset_high;
+	short offset_low;//中断处理函数的低位地址
+	short selector;//选择子
+	char dw_count;//
+	char access_right;//权限
+	short offset_high;//中断处理函数的高位地址
 };
 void init_gdtidt(void);
 void set_segmdesc(struct SEGMENT_DESCRIPTOR *sd, unsigned int limit, int base, int ar);

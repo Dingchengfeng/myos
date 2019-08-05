@@ -8,6 +8,7 @@ void HariMain(void)
 	int mx, my;
 	
 	init_gdtidt();//初始化段号表
+	init_pic();
 	init_palette(); //初始化调色板色表,就是建立编号到颜色的索引
 	init_screen(binfo->vram, binfo->scrnx, binfo->scrny); //初始化屏幕
 	mx = (binfo->scrnx - 16) / 2; //16是鼠标本身的长

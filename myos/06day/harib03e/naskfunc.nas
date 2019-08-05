@@ -94,12 +94,12 @@ _load_idtr:		; void load_idtr(int limit, int addr);
 _asm_inthandler21:
 		PUSH	ES
 		PUSH	DS
-		PUSHAD
+		PUSHAD			;把EAX EBX ECX EDX ESP EBP ESI EDI 的值入栈
 		MOV		EAX,ESP
 		PUSH	EAX
 		MOV		AX,SS
 		MOV		DS,AX
-		MOV		ES,AX
+		MOV		ES,AX	;C语言认为DS ES SS 都是指向同一个段
 		CALL	_inthandler21
 		POP		EAX
 		POPAD

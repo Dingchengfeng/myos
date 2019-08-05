@@ -7,9 +7,9 @@ void HariMain(void)
 	char s[40],mcursor[256];
 	int mx, my;
 	
-	init_gdtidt();//初始化段号表
-	init_pic();
-	io_sti(); 
+	init_gdtidt();//初始化段号表，中断向量表
+	init_pic();//初始化PIC
+	io_sti(); //cpu中断使能
 	
 	init_palette(); //初始化调色板色表,就是建立编号到颜色的索引
 	init_screen8(binfo->vram, binfo->scrnx, binfo->scrny); //初始化屏幕
@@ -20,8 +20,8 @@ void HariMain(void)
 	sprintf(s, "(%d, %d)", mx, my);
 	putfonts8_asc(binfo->vram, binfo->scrnx, 0, 0, COL8_FFFFFF, s);
 	
-	io_out8(PIC0_IMR, 0xf9);
-	io_out8(PIC1_IMR, 0xef);
+	io_out8(PIC0_IMR, 0xf9); //1111 1001 接收键盘和PIC1中断
+	io_out8(PIC1_IMR, 0xef); //1110 1111 接收鼠标中断
 	
 	for (;;) {
 		io_hlt();

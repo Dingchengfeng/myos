@@ -1,8 +1,8 @@
-TOOLPATH = ../z_tools/
-INCPATH  = ../z_tools/haribote/
-
 OBJS_BOOTPACK = bootpack.obj naskfunc.obj hankaku.obj graphic.obj dsctbl.obj \
 		int.obj
+TOOLPATH = ../../tolset/z_tools/
+INCPATH  = ../../tolset/z_tools/haribote/
+
 MAKE     = $(TOOLPATH)make.exe -r
 NASK     = $(TOOLPATH)nask.exe
 CC1      = $(TOOLPATH)cc1.exe -I$(INCPATH) -Os -Wall -quiet
@@ -38,7 +38,7 @@ hankaku.obj : hankaku.bin Makefile
 
 bootpack.bim : $(OBJS_BOOTPACK) Makefile
 	$(OBJ2BIM) @$(RULEFILE) out:bootpack.bim stack:3136k map:bootpack.map \
-		bootpack.obj naskfunc.obj hankaku.obj graphic.obj dsctbl.obj
+		$(OBJS_BOOTPACK)
 # 3MB+64KB=3136KB
 
 bootpack.hrb : bootpack.bim Makefile
@@ -48,7 +48,7 @@ haribote.sys : asmhead.bin bootpack.hrb Makefile
 	copy /B asmhead.bin+bootpack.hrb haribote.sys
 
 haribote.img : ipl10.bin haribote.sys Makefile
-	$(EDIMG)   imgin:../z_tools/fdimg0at.tek \
+	$(EDIMG)   imgin:../../tolset/z_tools/fdimg0at.tek \
 		wbinimg src:ipl10.bin len:512 from:0 to:0 \
 		copy from:haribote.sys to:@: \
 		imgout:haribote.img
@@ -70,8 +70,8 @@ img :
 
 run :
 	$(MAKE) img
-	$(COPY) haribote.img ..\z_tools\qemu\fdimage0.bin
-	$(MAKE) -C ../z_tools/qemu
+	$(COPY) haribote.img ..\..\tolset\z_tools\qemu\fdimage0.bin
+	$(MAKE) -C ../../tolset/z_tools/qemu
 
 install :
 	$(MAKE) img

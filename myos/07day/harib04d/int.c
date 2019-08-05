@@ -25,7 +25,7 @@ void init_pic(void)
 
 #define PORT_KEYDAT		0x0060
 
-struct KEYBUF keybuf;
+struct KEYBUF keybuf;//初始值都是0
 
 void inthandler21(int *esp)
 /* PS/2键盘中断处理程序*/

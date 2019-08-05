@@ -13,7 +13,7 @@ void HariMain(void)
 	
 	init_gdtidt();//初始化段号表
 	init_pic();
-	io_sti(); 
+	io_sti();  //中断使能
 	
 	io_out8(PIC0_IMR, 0xf9); //PIC0中断许可
 	io_out8(PIC1_IMR, 0xef); //PIC1中断许可
@@ -28,13 +28,13 @@ void HariMain(void)
 	putfonts8_asc(binfo->vram, binfo->scrnx, 0, 0, COL8_FFFFFF, s);
 	
 	for (;;) {
-		io_cli();
+		io_cli(); //中断禁止
 		if (keybuf.flag == 0) {
-			io_stihlt();
+			io_stihlt(); //中断使能，然后睡眠
 		} else {
-			i = keybuf.data;
+			i = keybuf.data; //处理中断接收的键盘数据
 			keybuf.flag = 0;
-			io_sti();
+			io_sti();//中断使能
 			sprintf(s, "%02X", i);
 			boxfill8(binfo->vram, binfo->scrnx, COL8_008484, 0, 16, 15, 31);
 			putfonts8_asc(binfo->vram, binfo->scrnx, 0, 16, COL8_FFFFFF, s);

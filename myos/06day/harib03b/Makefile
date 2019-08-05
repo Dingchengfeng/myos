@@ -1,5 +1,5 @@
-TOOLPATH = ../z_tools/
-INCPATH  = ../z_tools/haribote/
+TOOLPATH = ../../tolset/z_tools/
+INCPATH  = ../../tolset/z_tools/haribote/
 
 MAKE     = $(TOOLPATH)make.exe -r
 NASK     = $(TOOLPATH)nask.exe
@@ -46,7 +46,7 @@ haribote.sys : asmhead.bin bootpack.hrb Makefile
 	copy /B asmhead.bin+bootpack.hrb haribote.sys
 
 haribote.img : ipl10.bin haribote.sys Makefile
-	$(EDIMG)   imgin:../z_tools/fdimg0at.tek \
+	$(EDIMG)   imgin:../../tolset/z_tools/fdimg0at.tek \
 		wbinimg src:ipl10.bin len:512 from:0 to:0 \
 		copy from:haribote.sys to:@: \
 		imgout:haribote.img
@@ -68,8 +68,8 @@ img :
 
 run :
 	$(MAKE) img
-	$(COPY) haribote.img ..\z_tools\qemu\fdimage0.bin
-	$(MAKE) -C ../z_tools/qemu
+	$(COPY) haribote.img ..\..\tolset\z_tools\qemu\fdimage0.bin
+	$(MAKE) -C ../../tolset/z_tools/qemu
 
 install :
 	$(MAKE) img
@@ -78,11 +78,7 @@ install :
 clean :
 	-$(DEL) *.bin
 	-$(DEL) *.lst
-	-$(DEL) *.gas
 	-$(DEL) *.obj
-	-$(DEL) bootpack.nas
-	-$(DEL) graphic.nas
-	-$(DEL) dsctbl.nas
 	-$(DEL) bootpack.map
 	-$(DEL) bootpack.bim
 	-$(DEL) bootpack.hrb

@@ -67,7 +67,7 @@ void wait_KBC_sendready(void)
 
 void init_keyboard(void)
 {
-	/* 初始化键盘控制电路 */
+	/* 初始化键盘控制电路(鼠标控制电路也在这里面) */
 	wait_KBC_sendready();
 	io_out8(PORT_KEYCMD, KEYCMD_WRITE_MODE); //键盘控制电路准备完毕后，告诉键盘将要设定键盘模式
 	wait_KBC_sendready();
@@ -85,7 +85,7 @@ void enable_mouse(void)
 	io_out8(PORT_KEYCMD, KEYCMD_SENDTO_MOUSE);//如果往键盘控制端口发送0xd4,下一条数据就会发送给鼠标
 	wait_KBC_sendready();
 	io_out8(PORT_KEYDAT, MOUSECMD_ENABLE);//往键盘数据端口发送鼠标激活指令
-	return; /* 顺利的话，键盘控制器会向cpu发送ACK(0xfa) */
+	return; /* 顺利的话，键盘控制器会向cpu发送ACK(0xfa) 产生一次鼠标中断请求*/
 }
 
 

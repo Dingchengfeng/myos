@@ -2,23 +2,23 @@
 #include <stdio.h>
 
 void init_pic(void)
-/* PIC³õÊ¼»¯ */
+/* PICåˆå§‹åŒ– */
 {
-	io_out8(PIC0_IMR,  0xff  ); /* ½ûÖ¹ËùÓÐÖÐ¶Ï */
-	io_out8(PIC1_IMR,  0xff  ); /* ½ûÖ¹ËùÓÐÖÐ¶Ï */
+	io_out8(PIC0_IMR,  0xff  ); /* ç¦æ­¢æ‰€æœ‰ä¸­æ–­ */
+	io_out8(PIC1_IMR,  0xff  ); /* ç¦æ­¢æ‰€æœ‰ä¸­æ–­ */
 
-	io_out8(PIC0_ICW1, 0x11  ); /* ±ßÑØ´¥·¢Ä£Ê½ */
-	io_out8(PIC0_ICW2, 0x20  ); /* IRQ0-7ÓÉINT20-27½ÓÊÕ */
-	io_out8(PIC0_ICW3, 1 << 2); /* PIC1ÓÉIRQ2Á¬½Ó */
-	io_out8(PIC0_ICW4, 0x01  ); /* ÎÞ»º³åÄ£Ê½ */
+	io_out8(PIC0_ICW1, 0x11  ); /* è¾¹æ²¿è§¦å‘æ¨¡å¼ */
+	io_out8(PIC0_ICW2, 0x20  ); /* IRQ0-7ç”±INT20-27æŽ¥æ”¶ */
+	io_out8(PIC0_ICW3, 1 << 2); /* PIC1ç”±IRQ2è¿žæŽ¥ */
+	io_out8(PIC0_ICW4, 0x01  ); /* æ— ç¼“å†²æ¨¡å¼ */
 
-	io_out8(PIC1_ICW1, 0x11  ); /* ±ßÑØ´¥·¢Ä£Ê½ */            
-	io_out8(PIC1_ICW2, 0x28  ); /* IRQ8-15ÓÉINT28-2f½ÓÊÕ */ 
-	io_out8(PIC1_ICW3, 2     ); /* PIC1ÓÉIRQ2Á¬½Ó */       
-	io_out8(PIC1_ICW4, 0x01  ); /* ÎÞ»º³åÄ£Ê½ */             
+	io_out8(PIC1_ICW1, 0x11  ); /* è¾¹æ²¿è§¦å‘æ¨¡å¼ */            
+	io_out8(PIC1_ICW2, 0x28  ); /* IRQ8-15ç”±INT28-2fæŽ¥æ”¶ */ 
+	io_out8(PIC1_ICW3, 2     ); /* PIC1ç”±IRQ2è¿žæŽ¥ */       
+	io_out8(PIC1_ICW4, 0x01  ); /* æ— ç¼“å†²æ¨¡å¼ */             
 
-	io_out8(PIC0_IMR,  0xfb  ); /* 11111011 IRQ2£¨PIC1£©ÒÔÍâÈ«²¿½ûÖ¹ */
-	io_out8(PIC1_IMR,  0xff  ); /* 11111111 ½ûÖ¹ËùÓÐÖÐ¶Ï */
+	io_out8(PIC0_IMR,  0xfb  ); /* 11111011 IRQ2ï¼ˆPIC1ï¼‰ä»¥å¤–å…¨éƒ¨ç¦æ­¢ */
+	io_out8(PIC1_IMR,  0xff  ); /* 11111111 ç¦æ­¢æ‰€æœ‰ä¸­æ–­ */
 
 	return;
 }
@@ -26,21 +26,21 @@ void init_pic(void)
 #define PORT_KEYDAT		0x0060
 
 void inthandler21(int *esp)
-/* PS/2¼üÅÌÖÐ¶Ï´¦Àí³ÌÐò*/
+/* PS/2é”®ç›˜ä¸­æ–­å¤„ç†ç¨‹åº*/
 {
 	struct BOOTINFO *binfo = (struct BOOTINFO *) ADR_BOOTINFO;
 	unsigned char data,s[4];
-	io_out8(PIC0_OCW2,0x61); //IRQ-01ÊÜÀíÍê³ÉµÄÍ¨Öª£¬ÕâÑùPIC¾Í»á¼ÌÐø¼àÊÓIRQ1ÖÐ¶Ï
+	io_out8(PIC0_OCW2,0x61); //IRQ-01å—ç†å®Œæˆçš„é€šçŸ¥ï¼Œè¿™æ ·PICå°±ä¼šç»§ç»­ç›‘è§†IRQ1ä¸­æ–­
 	data = io_in8(PORT_KEYDAT);
-	sprintf(s, "%02X", data);//Á½Î»16½øÖÆÊý£¬²»×ã²¹0£¬
-	boxfill8(binfo->vram, binfo->scrnx, COL8_008484, 0, 16, 15, 31);//ÓÃ±³¾°É«¸²¸ÇÕâ¸öÎ»ÖÃ£¬ÆäÊµÊÇ¸²¸ÇÉÏ¸ö×Ö·û¡£
+	sprintf(s, "%02X", data);//ä¸¤ä½16è¿›åˆ¶æ•°ï¼Œä¸è¶³è¡¥0ï¼Œ
+	boxfill8(binfo->vram, binfo->scrnx, COL8_008484, 0, 16, 15, 31);//ç”¨èƒŒæ™¯è‰²è¦†ç›–è¿™ä¸ªä½ç½®ï¼Œå…¶å®žæ˜¯è¦†ç›–ä¸Šä¸ªå­—ç¬¦ã€‚
 	putfonts8_asc(binfo->vram, binfo->scrnx, 0, 16, COL8_FFFFFF, s);
 	
 	return;
 }
 
 void inthandler2c(int *esp)
-/* PS/2Êó±êÖÐ¶Ï´¦Àí³ÌÐò */
+/* PS/2é¼ æ ‡ä¸­æ–­å¤„ç†ç¨‹åº */
 {
 	struct BOOTINFO *binfo = (struct BOOTINFO *) ADR_BOOTINFO;
 	boxfill8(binfo->vram, binfo->scrnx, COL8_000000, 0, 0, 32 * 8 - 1, 15);
@@ -49,15 +49,9 @@ void inthandler2c(int *esp)
 		io_hlt();
 	}
 }
-//¶ÔÒ»²¿·Ö»úÐÍ¶øÑÔ£¬Ëæ×ÅPICµÄ³õÊ¼»¯£¬»á²úÉúÒ»´ÎIRQÖÐ¶Ï£¬Èç¹û²»¶Ô¸ÃÖÐ¶Ï´¦Àí³ÌÐòÖ´ÐÐSTI,²Ù×÷ÏµÍ³µÄÆô¶¯»áÊ§°Ü¡£
+//å¯¹ä¸€éƒ¨åˆ†æœºåž‹è€Œè¨€ï¼Œéšç€PICçš„åˆå§‹åŒ–ï¼Œä¼šäº§ç”Ÿä¸€æ¬¡IRQä¸­æ–­ï¼Œå¦‚æžœä¸å¯¹è¯¥ä¸­æ–­å¤„ç†ç¨‹åºæ‰§è¡ŒSTI,æ“ä½œç³»ç»Ÿçš„å¯åŠ¨ä¼šå¤±è´¥ã€‚
 void inthandler27(int *esp)
-/* PIC0¤«¤é¤Î²»ÍêÈ«¸î¤êÞz¤ßŒ²ß */
-/* Athlon64X2™C¤Ê¤É¤Ç¤Ï¥Á¥Ã¥×¥»¥Ã¥È¤Î¶¼ºÏ¤Ë¤è¤êPIC¤Î³õÆÚ»¯•r¤Ë¤³¤Î¸î¤êÞz¤ß¤¬1¶È¤À¤±¤ª¤³¤ë */
-/* ¤³¤Î¸î¤êÞz¤ß„IÀíévÊý¤Ï¡¢¤½¤Î¸î¤êÞz¤ß¤ËŒ¤·¤ÆºÎ¤â¤·¤Ê¤¤¤Ç¤ä¤êß^¤´¤¹ */
-/* ¤Ê¤¼ºÎ¤â¤·¤Ê¤¯¤Æ¤¤¤¤¤Î£¿
-	¡ú  ¤³¤Î¸î¤êÞz¤ß¤ÏPIC³õÆÚ»¯•r¤ÎëŠšÝµÄ¤Ê¥Î¥¤¥º¤Ë¤è¤Ã¤Æ°kÉú¤·¤¿¤â¤Î¤Ê¤Î¤Ç¡¢
-		¤Þ¤¸¤á¤ËºÎ¤«„IÀí¤·¤Æ¤ä¤ë±ØÒª¤¬¤Ê¤¤¡£									*/
 {
-	io_out8(PIC0_OCW2, 0x67); /* IRQ-07ÊÜ¸¶ÍêÁË¤òPIC¤ËÍ¨Öª(7-1²ÎÕÕ) */
+	io_out8(PIC0_OCW2, 0x67); /* é€šçŸ¥PIC IRQ-07å·²å—ç† */
 	return;
 }

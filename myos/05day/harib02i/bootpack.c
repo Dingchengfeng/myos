@@ -262,7 +262,7 @@ void init_gdtidt(void)
 
 	return;
 }
-//limit是最大偏移地址
+//limit是段大小-1
 void set_segmdesc(struct SEGMENT_DESCRIPTOR *sd, unsigned int limit, int base, int ar)
 {
 	if (limit > 0xfffff) {//1M

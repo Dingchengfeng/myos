@@ -57,7 +57,7 @@ struct SEGMENT_DESCRIPTOR {
 	char limit_high, base_high;//base_high段基址的高8位
 };
 struct GATE_DESCRIPTOR {
-	short offset_low, selector;
+	short offset_low, selector;//selector表示中断处理函数在哪一个段
 	char dw_count, access_right;
 	short offset_high;
 };

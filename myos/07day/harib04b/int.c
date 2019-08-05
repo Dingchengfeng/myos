@@ -25,9 +25,9 @@ void init_pic(void)
 
 #define PORT_KEYDAT		0x0060
 
-struct KEYBUF keybuf;
+struct KEYBUF keybuf; //没有初始化分配内存地址的话，默认会在int.c程序末尾处
 
-void inthandler21(int *esp)
+void inthandler21(int *esp) //中断函数只负责接收中断数据
 /* PS/2键盘中断处理程序*/
 {
 	unsigned char data;

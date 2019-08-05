@@ -15,13 +15,13 @@ void init_gdtidt(void)
 	}
 	set_segmdesc(gdt + 1, 0xffffffff, 0x00000000, AR_DATA32_RW);//1号段，大小4G，段基址是0，表示CPU所能管理的内存本身
 	set_segmdesc(gdt + 2, 0x0007ffff, 0x00280000, AR_CODE32_ER);//2号段，大小512K,段基址是0x00280000,是我们运行bootpack.hrb用的
-	load_gdtr(LIMIT_GDT, ADR_GDT);//给GDTR赋值（段号表寄存器），6字节寄存器 0xffff00270000
+	load_gdtr(LIMIT_GDT, ADR_GDT);//给GDTR赋值（段号表寄存器），6字节寄存器 0xffff00270000 ffff/8 = 8191,即最多是8192个段
 
 	/* IDT初始化 */
 	for (i = 0; i < LIMIT_IDT / 8; i++) {
 		set_gatedesc(idt + i, 0, 0, 0);
 	}
-	load_idtr(LIMIT_IDT, ADR_IDT);//给IDTR赋值（中断向量号表寄存器），6字节寄存器0x07ff0026f800
+	load_idtr(LIMIT_IDT, ADR_IDT);//给IDTR赋值（中断向量号表寄存器），6字节寄存器0x07ff0026f800 ,7ff/8=255,即最多是256个中断向量
 
 	return;
 }

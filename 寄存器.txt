@@ -4,7 +4,7 @@ AX accumulator,累加寄存器（AL+AH）//用来进行各种运算
 BX base,基址寄存器（BL+CH）//可用来指定内存地址（作为基点）
 CX counter,计数寄存器（CL+CH）//用于计数
 DX data,数据寄存器（DL+DH）
-SP stack pointer,栈指针寄存器
+SP stack pointer,栈指针寄存器，栈顶指针
 BP base pointer,基址指针寄存器//可用来指定内存地址
 SI source index,源变址寄存器//可用来指定内存地址
 DI destination index,目的变址寄存器//可用来指定内存地址
@@ -16,7 +16,7 @@ DS data segment,数据段寄存器 //默认段寄存器
 ES extra segment,附加段寄存器
 FS 没有名称
 GS 没有名称
-SS stack segment,栈段寄存器
+SS stack segment,栈段寄存器,栈基地址
 
 标志寄存器:EFLAGS
 
