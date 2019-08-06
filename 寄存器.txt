@@ -19,6 +19,7 @@ GS 没有名称
 SS stack segment,栈段寄存器,栈基地址
 
 标志寄存器:EFLAGS
+https://blog.csdn.net/jn1158359135/article/details/7761011
 
 控制寄存器：CR0-CR4
 作用:控制寄存器决定处理器的操作模式和当前执行任务的一些特征
