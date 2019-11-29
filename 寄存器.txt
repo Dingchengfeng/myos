@@ -18,6 +18,7 @@ FS 没有名称
 GS 没有名称
 SS stack segment,栈段寄存器,栈基地址
 
+IP 指令指针寄存器
 标志寄存器:EFLAGS
 https://blog.csdn.net/jn1158359135/article/details/7761011
 
@@ -32,5 +33,9 @@ CR4:一些结构的扩展.表明对于特定的处理器和操作系统执行支
 
 调试寄存器：DR0-DR7
 
-系统地址寄存器:GDTR、IDTR、LDTR和TR
+系统地址寄存器:
+GDTR 全局描述符表寄存器
+LDTR 局部描述符表寄存器
+LDTR 中断描述符表寄存器
+TR 任务状态段寄存器
 
