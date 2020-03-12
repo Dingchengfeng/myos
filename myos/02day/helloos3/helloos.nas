@@ -26,19 +26,19 @@
 ;程序主体
 
 entry:
-		MOV		AX,0			; 初始化寄存器
-		MOV		SS,AX     ; 栈段寄存器
-		MOV		SP,0x7c00 ; 栈指针寄存器
-		MOV		DS,AX     ; 数据段寄存器
+		MOV		AX,0	  		; 初始化寄存器
+		MOV		SS,AX     		; 栈段寄存器
+		MOV		SP,0x7c00 		; 栈指针寄存器
+		MOV		DS,AX     		; 数据段寄存器
 		MOV		ES,AX			; 附加段寄存器
 
-		MOV		SI,msg		; 源变址寄存器		
+		MOV		SI,msg			; 源变址寄存器		
 putloop:
-		MOV		AL,[SI]		; 要显示的文字 [a]表示取地址编号为a的内存地址的值
+		MOV		AL,[SI]			; 要显示的文字 [a]表示取地址编号为a的内存地址的值
 		ADD		SI,1			; SI里的值自增
 		CMP		AL,0			; msg末尾是0
 		JE		fin
-		MOV		AH,0x0e		; INT 0x10 显示文字设置
+		MOV		AH,0x0e			; INT 0x10 显示文字设置
 		MOV		BX,15			; 指定字符颜色（0-255）(BH=0,BL=color code)
 		INT		0x10			; 调用显卡BIOS
 		JMP		putloop
@@ -53,7 +53,7 @@ msg:
 		DB		0
 		
 		RESB	0x7dfe-$		; 填充0x00到0x7dfe（$表示将要读入的内存地址）
-		DB		0x55, 0xaa	;启动区末尾
+		DB		0x55, 0xaa		; 启动区末尾
 ; 启动区以外部分的输出
 
 		DB		0xf0, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00
